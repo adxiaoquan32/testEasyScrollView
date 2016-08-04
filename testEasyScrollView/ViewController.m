@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SZBMMeetingChartView.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    
+    
+    SZBMMeetingChartView *cView = [[SZBMMeetingChartView alloc] initWithFrame:CGRectInset(self.view.bounds, 0, 21)];
+    [self.view addSubview:cView];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

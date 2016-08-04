@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE728DE91D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE728DE81D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.m */; };
 		BE89A6BC1D5180330006420E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6BB1D5180330006420E /* main.m */; };
 		BE89A6BF1D5180330006420E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6BE1D5180330006420E /* AppDelegate.m */; };
 		BE89A6C21D5180330006420E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6C11D5180330006420E /* ViewController.m */; };
@@ -15,6 +16,7 @@
 		BE89A6CA1D5180330006420E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE89A6C81D5180330006420E /* LaunchScreen.storyboard */; };
 		BE89A6D51D5180340006420E /* testEasyScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6D41D5180340006420E /* testEasyScrollViewTests.m */; };
 		BE89A6E01D5180340006420E /* testEasyScrollViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6DF1D5180340006420E /* testEasyScrollViewUITests.m */; };
+		BE89A6F01D5190B30006420E /* SZBMMeetingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6EF1D5190B30006420E /* SZBMMeetingChartView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE728DE71D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMMeetingTimeRulesHeaderView.h; sourceTree = "<group>"; };
+		BE728DE81D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetingTimeRulesHeaderView.m; sourceTree = "<group>"; };
 		BE89A6B71D5180330006420E /* testEasyScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testEasyScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE89A6BB1D5180330006420E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BE89A6BD1D5180330006420E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 		BE89A6DB1D5180340006420E /* testEasyScrollViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testEasyScrollViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE89A6DF1D5180340006420E /* testEasyScrollViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testEasyScrollViewUITests.m; sourceTree = "<group>"; };
 		BE89A6E11D5180340006420E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE89A6EE1D5190B30006420E /* SZBMMeetingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMMeetingChartView.h; sourceTree = "<group>"; };
+		BE89A6EF1D5190B30006420E /* SZBMMeetingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetingChartView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		BE89A6AE1D5180330006420E = {
 			isa = PBXGroup;
 			children = (
+				BE89A6ED1D51909F0006420E /* SZBMMeetingChartView */,
 				BE89A6B91D5180330006420E /* testEasyScrollView */,
 				BE89A6D31D5180340006420E /* testEasyScrollViewTests */,
 				BE89A6DE1D5180340006420E /* testEasyScrollViewUITests */,
@@ -138,6 +145,18 @@
 				BE89A6E11D5180340006420E /* Info.plist */,
 			);
 			path = testEasyScrollViewUITests;
+			sourceTree = "<group>";
+		};
+		BE89A6ED1D51909F0006420E /* SZBMMeetingChartView */ = {
+			isa = PBXGroup;
+			children = (
+				BE89A6EE1D5190B30006420E /* SZBMMeetingChartView.h */,
+				BE89A6EF1D5190B30006420E /* SZBMMeetingChartView.m */,
+				BE728DE71D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.h */,
+				BE728DE81D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.m */,
+			);
+			name = SZBMMeetingChartView;
+			path = testEasyScrollView/SZBMMeetingChartView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,7 +291,9 @@
 			files = (
 				BE89A6C21D5180330006420E /* ViewController.m in Sources */,
 				BE89A6BF1D5180330006420E /* AppDelegate.m in Sources */,
+				BE728DE91D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.m in Sources */,
 				BE89A6BC1D5180330006420E /* main.m in Sources */,
+				BE89A6F01D5190B30006420E /* SZBMMeetingChartView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +519,7 @@
 				BE89A6E61D5180340006420E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BE89A6E71D5180340006420E /* Build configuration list for PBXNativeTarget "testEasyScrollViewTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +528,7 @@
 				BE89A6E91D5180340006420E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BE89A6EA1D5180340006420E /* Build configuration list for PBXNativeTarget "testEasyScrollViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +537,7 @@
 				BE89A6EC1D5180340006420E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
