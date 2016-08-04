@@ -8,18 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, enSZBMRulesHours)
-{
-    enSZBMRulesHours_8h     = 0,
-    enSZBMRulesHours_24h,
-    enSZBMRulesHours_ALL
-};
-
-
 
 @interface SZBMMeetingTimeRulesHeaderView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame withHours:(enSZBMRulesHours)hours;
+- (instancetype)initWithFrame:(CGRect)frame withTitles:(NSArray*)titles;
 
 
 @end

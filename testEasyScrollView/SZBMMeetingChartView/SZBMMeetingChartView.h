@@ -7,28 +7,40 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SZBMMeetingChartViewHeader.h"
 
 
-#define WINDOW_WIDTH        [[UIScreen mainScreen] bounds].size.width
-
-#define SZBMMeetingChartView_left_width                                        100
-#define SZBMMeetingChartView_left_right_pading                                 0
 #define SZBMMeetingChartView_total_left (SZBMMeetingChartView_left_width +     SZBMMeetingChartView_left_right_pading)
 
-
-// 一个单位刻度宽度
-#define SZBMMeetingChartView_rules_unit                                        50
-// 图表包含多少小时
-#define SZBMMeetingChartView_hours                                             24
 // 图表区占用宽度
-#define SZBMMeetingChartView_chart_width    (SZBMMeetingChartView_rules_unit * SZBMMeetingChartView_hours)
-#define SZBMMeetingChartView_chart_height                                      40
-#define SZBMMeetingChartView_right_pading                                      10
+#define SZBMMeetingChartView_chart_width    (SZBMMeetingChartView_rules_width_unit * SZBMMeetingChartView_hours)
+
+
+typedef void(^SZBMMeetingChartViewTimeSBack)(NSInteger nMbeginTimeMins);
+
 
 @interface SZBMMeetingChartView : UIView
 
+/**
+ *  设置会议时长
+ *
+ *  @param minitues 分钟
+ */
+- (void)setMeetingTimeLong:(float)minitues;
 
+/**
+ *  实时返回滚动后的时间
+ *
+ *  @param callBacBlock SZBMMeetingChartViewTimeSBack
+ */
+- (void)setTimeSelectedCallBack:(SZBMMeetingChartViewTimeSBack)callBacBlock;
 
+/**
+ *  设置用户的日程数据
+ *
+ *  @param datas datas description
+ */
+- (void)loadChartData:(NSArray *)datas;
 
 
 @end
