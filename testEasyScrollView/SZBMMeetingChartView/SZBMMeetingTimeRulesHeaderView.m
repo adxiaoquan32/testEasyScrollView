@@ -63,7 +63,6 @@
         CGContextAddLineToPoint(context, f_width_per_hour * i, (CGRectGetHeight(rect)-f_line_height)/2 + f_line_height);
         CGContextStrokePath(context);
         
-        
     }
     
 }

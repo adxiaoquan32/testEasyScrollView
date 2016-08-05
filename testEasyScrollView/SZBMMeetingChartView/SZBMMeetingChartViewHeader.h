@@ -18,7 +18,10 @@
 
 #define RGB(R,G,B,A) [UIColor colorWithRed:(R)/255.0f green:(G)/255.0f blue:(B)/255.0f alpha:(A)/255.0f]
 
-#define SZBMMeetingChartView_left_width            100
+// 左部分名字区域的宽度
+#define SZBMMeetingChartView_left_width            80
+
+// 左边tableview 和 右边tablveivew 之间留白的宽度
 #define SZBMMeetingChartView_left_right_pading     0
 
 // 一个单位刻度宽度
