@@ -41,6 +41,9 @@
 // 画图表的颜色
 #define SZBMMeetingChartView_chart_view_color      RGB(48, 138, 60, 255)
 
+// 画图表背影的颜色
+#define SZBMMeetingChartView_chart_view_bgcolor      RGB(255, 255, 255, 255)
+
 // 时间轴开始的时间
 #define SZBMMeetingChartView_hours_begin_time      0   //8*60  //0
 

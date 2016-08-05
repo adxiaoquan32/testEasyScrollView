@@ -53,6 +53,8 @@
         _leftTbView.rowHeight                               = SZBMMeetingChartView_chart_height;
         _leftTbView.showsVerticalScrollIndicator            = NO;
         _leftTbView.showsHorizontalScrollIndicator          = NO;
+        _leftTbView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _leftTbView.backgroundColor = [UIColor clearColor];
         [self addSubview:_leftTbView];
 
 
@@ -77,6 +79,8 @@
         _rightTbView.rowHeight                              = SZBMMeetingChartView_chart_height;
         _rightTbView.showsVerticalScrollIndicator           = NO;
         _rightTbView.showsHorizontalScrollIndicator         = NO;
+        _rightTbView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _rightTbView.backgroundColor = [UIColor clearColor];
         [_horizonalScrollView addSubview:_rightTbView];
 
 
@@ -103,15 +107,11 @@
         
         self.timeTitleArr = SZBMMeetingChartView_hours_title;
         _f_begining_time = SZBMMeetingChartView_hours_begin_time;
-        
-
-        _rightTbView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _horizonalScrollView.backgroundColor                = [UIColor whiteColor];
         [_horizonalScrollView setContentOffset:CGPointMake((WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2 , 0)];
     
         
         // using for test
-        _rightTbView.backgroundColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.1];
+        _horizonalScrollView.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.1]
         
     }
     return self;
@@ -188,7 +188,7 @@
         tableView == _rightTbView)
     {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.bounds), SZBMMeetingChartView_chart_head_height)];
-        view.backgroundColor = [UIColor lightGrayColor];
+        view.backgroundColor = [UIColor clearColor];
         SZBMMeetingTimeRulesHeaderView *hview = [[SZBMMeetingTimeRulesHeaderView alloc] initWithFrame:view.bounds withTitles:self.timeTitleArr];
         hview.layer.cornerRadius = 10.0f; 
         hview.layer.masksToBounds = YES;
@@ -199,7 +199,9 @@
         return view;
     }
     
-    return nil;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    view.backgroundColor = [UIColor clearColor];
+    return view;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

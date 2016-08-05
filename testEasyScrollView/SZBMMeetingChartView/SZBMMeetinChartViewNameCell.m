@@ -27,6 +27,10 @@
 - (void)_initData
 {
     
+    self.textLabel.font = [UIFont systemFontOfSize:12.0f];
+    
+    self.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     

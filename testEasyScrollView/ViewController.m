@@ -29,7 +29,7 @@
     
  
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = RGB(244,245,246,205);//[UIColor colorWithRed:244/255.0 green:245/255.0 blue:246/255.0 alpha:0.1];
     
     CGRect rt = self.view.bounds;
     rt.origin.y = 21;

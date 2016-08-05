@@ -73,6 +73,15 @@
 
     float f_startDraw_y = (CGRectGetHeight(rect) - SZBMMeetingChartView_chart_view_height)/2;
     
+    // 加一条白条底色
+    {
+        UIColor *fileclickcore = SZBMMeetingChartView_chart_view_bgcolor;
+        UIBezierPath *roundedPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, f_startDraw_y, CGRectGetWidth(rect), SZBMMeetingChartView_chart_view_height) cornerRadius:2.0f];
+        CGContextSetFillColorWithColor(context, fileclickcore.CGColor);
+        [roundedPath fill];
+    }
+    
+    
     for ( szbmMeetingSchedule *schedulOb in self.chartData.schedules)
     {
         float f_start_time = [self _getStartTimeline:schedulOb];
