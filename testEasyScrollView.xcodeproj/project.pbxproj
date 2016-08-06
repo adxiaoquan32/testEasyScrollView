@@ -17,6 +17,7 @@
 		BE89A6D51D5180340006420E /* testEasyScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6D41D5180340006420E /* testEasyScrollViewTests.m */; };
 		BE89A6E01D5180340006420E /* testEasyScrollViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6DF1D5180340006420E /* testEasyScrollViewUITests.m */; };
 		BE89A6F01D5190B30006420E /* SZBMMeetingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89A6EF1D5190B30006420E /* SZBMMeetingChartView.m */; };
+		BEA4F9531D55877A00340FD2 /* SZBMChartSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA4F9521D55877A00340FD2 /* SZBMChartSliderView.m */; };
 		BECA38AF1D52F7090077A45D /* SZBMMeetinChartViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BECA38AE1D52F7090077A45D /* SZBMMeetinChartViewCell.m */; };
 		BECA38C11D5314E50077A45D /* chartViewData.json in Resources */ = {isa = PBXBuildFile; fileRef = BECA38C01D5314E50077A45D /* chartViewData.json */; };
 		BECA38C41D531B260077A45D /* SZBMMeetinChartViewNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BECA38C31D531B260077A45D /* SZBMMeetinChartViewNameCell.m */; };
@@ -61,6 +62,8 @@
 		BE89A6E11D5180340006420E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE89A6EE1D5190B30006420E /* SZBMMeetingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMMeetingChartView.h; sourceTree = "<group>"; };
 		BE89A6EF1D5190B30006420E /* SZBMMeetingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetingChartView.m; sourceTree = "<group>"; };
+		BEA4F9511D55877A00340FD2 /* SZBMChartSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMChartSliderView.h; sourceTree = "<group>"; };
+		BEA4F9521D55877A00340FD2 /* SZBMChartSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMChartSliderView.m; sourceTree = "<group>"; };
 		BECA38AC1D52F58E0077A45D /* SZBMMeetingChartViewHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZBMMeetingChartViewHeader.h; sourceTree = "<group>"; };
 		BECA38AD1D52F7090077A45D /* SZBMMeetinChartViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMMeetinChartViewCell.h; sourceTree = "<group>"; };
 		BECA38AE1D52F7090077A45D /* SZBMMeetinChartViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetinChartViewCell.m; sourceTree = "<group>"; };
@@ -174,9 +177,19 @@
 				BECA38C31D531B260077A45D /* SZBMMeetinChartViewNameCell.m */,
 				BECA38C51D531DB20077A45D /* SZBMMeetinChartView_TestOb.h */,
 				BECA38C61D531DB20077A45D /* SZBMMeetinChartView_TestOb.m */,
+				BEA4F9501D55875E00340FD2 /* SZBMChartSliderView */,
 			);
 			name = SZBMMeetingChartView;
 			path = testEasyScrollView/SZBMMeetingChartView;
+			sourceTree = "<group>";
+		};
+		BEA4F9501D55875E00340FD2 /* SZBMChartSliderView */ = {
+			isa = PBXGroup;
+			children = (
+				BEA4F9511D55877A00340FD2 /* SZBMChartSliderView.h */,
+				BEA4F9521D55877A00340FD2 /* SZBMChartSliderView.m */,
+			);
+			path = SZBMChartSliderView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +326,7 @@
 			files = (
 				BE89A6C21D5180330006420E /* ViewController.m in Sources */,
 				BECA38C41D531B260077A45D /* SZBMMeetinChartViewNameCell.m in Sources */,
+				BEA4F9531D55877A00340FD2 /* SZBMChartSliderView.m in Sources */,
 				BECA38C71D531DB20077A45D /* SZBMMeetinChartView_TestOb.m in Sources */,
 				BE89A6BF1D5180330006420E /* AppDelegate.m in Sources */,
 				BE728DE91D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.m in Sources */,

@@ -43,8 +43,10 @@
     _addressLabel.numberOfLines = 0;
     
     
-    
-    SZBMMeetingChartView *cView = [[SZBMMeetingChartView alloc] initWithFrame:CGRectInset(self.view.bounds, 0, 42)];
+    rt = self.view.bounds;
+    rt.origin.y = 42;
+    rt.size.height -= 42;
+    SZBMMeetingChartView *cView = [[SZBMMeetingChartView alloc] initWithFrame:rt];
     [self.view addSubview:cView];
     
     [cView setMeetingTimeLong:60];

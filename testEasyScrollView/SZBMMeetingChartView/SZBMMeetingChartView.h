@@ -26,7 +26,7 @@ typedef void(^SZBMMeetingChartViewTimeSBack)(NSInteger nMbeginTimeMins);
  *
  *  @param minitues 分钟
  */
-- (void)setMeetingTimeLong:(float)minitues;
+- (void)setMeetingTimeLong:(NSInteger)minitues;
 
 /**
  *  实时返回滚动后的时间

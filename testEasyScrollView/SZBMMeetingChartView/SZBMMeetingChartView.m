@@ -11,6 +11,9 @@
 #import "SZBMMeetinChartViewCell.h"
 #import "SZBMMeetinChartViewNameCell.h"
 
+// addind a slider optional view
+#import "SZBMChartSliderView.h"
+
 @interface SZBMMeetingChartView()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     float _f_begining_time;
@@ -28,6 +31,7 @@
 @property (nonatomic,strong) NSArray        *timeTitleArr;
 
 @property (nonatomic,copy) SZBMMeetingChartViewTimeSBack timeCallBackBlock;
+@property (nonatomic,strong)SZBMChartSliderView *sliderView ;
 
 
 @end
@@ -101,6 +105,28 @@
         _timeLongView.layer.borderColor = [UIColor redColor].CGColor;
         _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
         [self addSubview:_timeLongView];
+        
+        
+        // testing
+        rt = self.bounds;
+        rt.size.height = 60;
+        rt.origin.y = CGRectGetHeight(self.bounds) - 20 - rt.size.height;
+        rt.size.width = 200;
+        rt.origin.x = (CGRectGetWidth(self.bounds) - CGRectGetWidth(rt))/2;
+        _sliderView = [[SZBMChartSliderView alloc] initWithFrame:rt];
+        [self addSubview:_sliderView];
+        
+        
+        __weak __typeof(self)weakSelf = self;
+        [_sliderView setTimeLongCallBack:^(NSInteger nMeetingTime) {
+            
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            [strongSelf _adjustTimelongFrame:nMeetingTime];
+            [strongSelf scrollViewDidScroll:strongSelf.horizonalScrollView];
+            
+        }];
+        
+        
 
         _chartDataArr                                       = [[NSMutableArray alloc] init];
         
@@ -122,19 +148,30 @@
  *
  *  @param minitues 分钟
  */
-- (void)setMeetingTimeLong:(float)minitues
+- (void)setMeetingTimeLong:(NSInteger)minitues
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        float v_width = SZBMMeetingChartView_rules_width_unit * (minitues/60.0f);
-        CGRect rt = _timeLongView.frame;
-        rt.size.width = v_width;
-        _timeLongView.frame = rt;
-        _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
+        [_sliderView initMeetingTime:minitues];
+
+        [self _adjustTimelongFrame:minitues];
+        
+        [self scrollViewDidScroll:self.horizonalScrollView];
     });
-     
     
 }
+
+- (void)_adjustTimelongFrame:(NSInteger)minitues
+{
+    
+    float v_width = SZBMMeetingChartView_rules_width_unit * (minitues/60.0f);
+    CGRect rt = _timeLongView.frame;
+    rt.size.width = v_width;
+    _timeLongView.frame = rt;
+    _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
+    
+}
+
 /**
  *  实时返回滚动后的时间
  *
