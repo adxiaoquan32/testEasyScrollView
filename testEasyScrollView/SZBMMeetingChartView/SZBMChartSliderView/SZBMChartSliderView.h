@@ -12,7 +12,7 @@
 #define SZBMChartSliderView_maximum 100
 
 // 最大时间调整范围
-#define SZBMChartSliderView_maximum_time 5
+#define SZBMChartSliderView_maximum_time 3
 
 
 typedef void(^SZBMChartSliderViewTimeLong)(NSInteger nMeetingTime);
