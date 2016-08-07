@@ -20,18 +20,18 @@
 }
 
 
-@property (nonatomic,strong) UIScrollView *horizonalScrollView;
-@property (nonatomic,strong) UITableView  *leftTbView;
-@property (nonatomic,strong) UITableView  *rightTbView;
+@property (nonatomic,strong) UIScrollView                  *horizonalScrollView;
+@property (nonatomic,strong) UITableView                   *leftTbView;
+@property (nonatomic,strong) UITableView                   *rightTbView;
 
-@property (nonatomic,strong) UIView       *timeLongView;
+@property (nonatomic,strong) UIView                        *timeLongView;
 
 
-@property (nonatomic,strong) NSMutableArray *chartDataArr;
-@property (nonatomic,strong) NSArray        *timeTitleArr;
+@property (nonatomic,strong) NSMutableArray                *chartDataArr;
+@property (nonatomic,strong) NSArray                       *timeTitleArr;
 
-@property (nonatomic,copy) SZBMMeetingChartViewTimeSBack timeCallBackBlock;
-@property (nonatomic,strong)SZBMChartSliderView *sliderView ;
+@property (nonatomic,copy  ) SZBMMeetingChartViewTimeSBack timeCallBackBlock;
+@property (nonatomic,strong) SZBMChartSliderView *sliderView                    ;
 
 
 @end
@@ -100,7 +100,7 @@
         _timeLongView = [[UIView alloc] initWithFrame:rt];
         _timeLongView.backgroundColor = [UIColor blackColor];
         _timeLongView.userInteractionEnabled = NO;
-        _timeLongView.alpha = 0.5f;
+        _timeLongView.alpha = 0.1f;
         _timeLongView.layer.borderWidth = 0.5f;
         _timeLongView.layer.borderColor = [UIColor redColor].CGColor;
         _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);

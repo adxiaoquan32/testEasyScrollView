@@ -10,7 +10,7 @@
 #import "SZBMMeetingChartViewHeader.h"
 
 
-#define SZBMMeetingChartView_total_left (SZBMMeetingChartView_left_width +     SZBMMeetingChartView_left_right_pading)
+#define SZBMMeetingChartView_total_left (SZBMMeetingChartView_left_width + SZBMMeetingChartView_left_right_pading)
 
 // 图表区占用宽度
 #define SZBMMeetingChartView_chart_width    (SZBMMeetingChartView_rules_width_unit * SZBMMeetingChartView_hours)

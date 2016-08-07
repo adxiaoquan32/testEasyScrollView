@@ -30,8 +30,8 @@
 
 @interface szbmMeetingChartData : NSObject
 
-@property (nonatomic,strong) NSString       *userName;
-@property (nonatomic,strong) NSArray        *schedules;
+@property (nonatomic,strong) NSString *userName;
+@property (nonatomic,strong) NSArray  *schedules;
 
 @end
 
