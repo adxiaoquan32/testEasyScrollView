@@ -123,6 +123,7 @@
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             [strongSelf _adjustTimelongFrame:nMeetingTime];
             [strongSelf scrollViewDidScroll:strongSelf.horizonalScrollView];
+            [strongSelf _detectScrollivewStopMoving:strongSelf.horizonalScrollView];
             
         }];
         
@@ -157,6 +158,9 @@
         [self _adjustTimelongFrame:minitues];
         
         [self scrollViewDidScroll:self.horizonalScrollView];
+        
+        [self _detectScrollivewStopMoving:self.horizonalScrollView];
+        
     });
     
 }
@@ -344,10 +348,11 @@
     {
         [scrollView setContentOffset:CGPointMake(CGRectGetWidth(_timeLongView.bounds)/2, 0) animated:YES];
     }
-    else if(f_inside_x >= [self _SZBMMeetingChartView_chart_width] - CGRectGetWidth(_timeLongView.bounds)/2)
+    else if(f_inside_x >= [self _SZBMMeetingChartView_chart_width] - CGRectGetWidth(_timeLongView.bounds))
     {
         [scrollView setContentOffset:CGPointMake([self _SZBMMeetingChartView_chart_width] - CGRectGetWidth(_timeLongView.bounds)/2, 0) animated:YES];
     }
+    
     
 }
 
