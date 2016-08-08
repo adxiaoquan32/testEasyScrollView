@@ -57,8 +57,8 @@
         _leftTbView.rowHeight                               = SZBMMeetingChartView_chart_height;
         _leftTbView.showsVerticalScrollIndicator            = NO;
         _leftTbView.showsHorizontalScrollIndicator          = NO;
-        _leftTbView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _leftTbView.backgroundColor = [UIColor clearColor];
+        _leftTbView.separatorStyle                          = UITableViewCellSeparatorStyleNone;
+        _leftTbView.backgroundColor                         = [UIColor clearColor];
         [self addSubview:_leftTbView];
 
 
@@ -83,37 +83,37 @@
         _rightTbView.rowHeight                              = SZBMMeetingChartView_chart_height;
         _rightTbView.showsVerticalScrollIndicator           = NO;
         _rightTbView.showsHorizontalScrollIndicator         = NO;
-        _rightTbView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _rightTbView.backgroundColor = [UIColor clearColor];
+        _rightTbView.separatorStyle                         = UITableViewCellSeparatorStyleNone;
+        _rightTbView.backgroundColor                        = [UIColor clearColor];
         [_horizonalScrollView addSubview:_rightTbView];
 
 
         // setting horizon contensize
         [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width] + (WINDOW_WIDTH - SZBMMeetingChartView_left_width), 0)];
-        
-        
+
+
         // set up timelongview
-        rt = self.bounds;
-        rt.origin.y = SZBMMeetingChartView_chart_head_height;
-        rt.size.height -= SZBMMeetingChartView_chart_head_height;
-        rt.size.width = 0;
-        _timeLongView = [[UIView alloc] initWithFrame:rt];
-        _timeLongView.backgroundColor = [UIColor blackColor];
-        _timeLongView.userInteractionEnabled = NO;
-        _timeLongView.alpha = 0.1f;
-        _timeLongView.layer.borderWidth = 0.5f;
-        _timeLongView.layer.borderColor = [UIColor redColor].CGColor;
-        _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
+        rt                                                  = self.bounds;
+        rt.origin.y                                         = SZBMMeetingChartView_chart_head_height;
+        rt.size.height                                      -= SZBMMeetingChartView_chart_head_height;
+        rt.size.width                                       = 0;
+        _timeLongView                                       = [[UIView alloc] initWithFrame:rt];
+        _timeLongView.backgroundColor                       = [UIColor blackColor];
+        _timeLongView.userInteractionEnabled                = NO;
+        _timeLongView.alpha                                 = 0.1f;
+        _timeLongView.layer.borderWidth                     = 0.5f;
+        _timeLongView.layer.borderColor                     = [UIColor redColor].CGColor;
+        _timeLongView.center                                = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
         [self addSubview:_timeLongView];
-        
-        
+
+
         // testing
-        rt = self.bounds;
-        rt.size.height = 60;
-        rt.origin.y = CGRectGetHeight(self.bounds) - 20 - rt.size.height;
-        rt.size.width = 200;
-        rt.origin.x = (CGRectGetWidth(self.bounds) - CGRectGetWidth(rt))/2;
-        _sliderView = [[SZBMChartSliderView alloc] initWithFrame:rt];
+        rt                                                  = self.bounds;
+        rt.size.height                                      = 60;
+        rt.origin.y                                         = CGRectGetHeight(self.bounds) - 20 - rt.size.height;
+        rt.size.width                                       = 200;
+        rt.origin.x                                         = (CGRectGetWidth(self.bounds) - CGRectGetWidth(rt))/2;
+        _sliderView                                         = [[SZBMChartSliderView alloc] initWithFrame:rt];
         [self addSubview:_sliderView];
         
         
@@ -129,16 +129,16 @@
         
         
 
-        _chartDataArr                                       = [[NSMutableArray alloc] init];
-        
-        
-        self.timeTitleArr = SZBMMeetingChartView_hours_title;
-        _f_begining_time = SZBMMeetingChartView_hours_begin_time;
+        _chartDataArr                        = [[NSMutableArray alloc] init];
+
+
+        self.timeTitleArr                    = SZBMMeetingChartView_hours_title;
+        _f_begining_time                     = SZBMMeetingChartView_hours_begin_time;
         [_horizonalScrollView setContentOffset:CGPointMake((WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2 , 0)];
-    
-        
+
+
         // using for test
-        _horizonalScrollView.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.1]
+        _horizonalScrollView.backgroundColor = [UIColor clearColor];//[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.1]
         
     }
     return self;
