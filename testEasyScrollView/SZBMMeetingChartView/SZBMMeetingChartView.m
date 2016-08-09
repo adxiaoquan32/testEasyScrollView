@@ -240,10 +240,8 @@
             [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width], 0)];
             [_horizonalScrollView setContentOffset:CGPointMake(f_offset_x, _horizonalScrollView.contentOffset.y)];
             
-            
             _nCurrentMode = 1;
         }
-        
         
     }
     

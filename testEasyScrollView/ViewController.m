@@ -58,7 +58,7 @@
         
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         
-        strongSelf.addressLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",nMbeginTimeMins/60,nMbeginTimeMins%60];
+        strongSelf.addressLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)(nMbeginTimeMins/60),(long)(nMbeginTimeMins%60)];
     }];
     
     
