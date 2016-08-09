@@ -10,13 +10,22 @@
 #import "SZBMMeetingTimeRulesHeaderView.h"
 #import "SZBMMeetinChartViewCell.h"
 #import "SZBMMeetinChartViewNameCell.h"
+#import "SZBMTimelongView.h"
 
 // addind a slider optional view
 #import "SZBMChartSliderView.h"
 
 @interface SZBMMeetingChartView()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
+    
     float _f_begining_time;
+    
+    BOOL __broopingMove;
+    
+    BOOL __bMoveEnable;
+    
+    NSInteger _nCurrentMode; //1:不留边模式 2:留边模式
+    
 }
 
 
@@ -24,7 +33,7 @@
 @property (nonatomic,strong) UITableView                   *leftTbView;
 @property (nonatomic,strong) UITableView                   *rightTbView;
 
-@property (nonatomic,strong) UIView                        *timeLongView;
+@property (nonatomic,strong) SZBMTimelongView              *timeLongView;
 
 
 @property (nonatomic,strong) NSMutableArray                *chartDataArr;
@@ -47,6 +56,8 @@
     if (self) {
 
         self.clipsToBounds                                  = YES;
+        __bMoveEnable                                       = SZBMMeetingChartView_TimelongMoveEnable;
+        _nCurrentMode                                       = __bMoveEnable?1:2;
 
         // 2 init left part of uitableview using as user name showing
         CGRect rt                                           = self.bounds;
@@ -75,7 +86,7 @@
 
         // 3 init rigth part of uitableview using for chart showing
         rt                                                  = self.bounds;
-        rt.origin.x                                         = (WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2;
+        rt.origin.x                                         = __bMoveEnable?0.0:(WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2;
         rt.size.width                                       = [self _SZBMMeetingChartView_chart_width];
         _rightTbView                                        = [[UITableView alloc] initWithFrame:rt style:UITableViewStylePlain];
         _rightTbView.dataSource                             = self;
@@ -89,7 +100,14 @@
 
 
         // setting horizon contensize
-        [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width] + (WINDOW_WIDTH - SZBMMeetingChartView_left_width), 0)];
+        if ( __bMoveEnable )
+        {
+            [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width] , 0)];
+        }
+        else
+        {
+            [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width] + (WINDOW_WIDTH - SZBMMeetingChartView_left_width), 0)];
+        }
 
 
         // set up timelongview
@@ -97,13 +115,17 @@
         rt.origin.y                                         = SZBMMeetingChartView_chart_head_height;
         rt.size.height                                      -= SZBMMeetingChartView_chart_head_height;
         rt.size.width                                       = 0;
-        _timeLongView                                       = [[UIView alloc] initWithFrame:rt];
-        _timeLongView.backgroundColor                       = [UIColor blackColor];
-        _timeLongView.userInteractionEnabled                = NO;
-        _timeLongView.alpha                                 = 0.1f;
-        _timeLongView.layer.borderWidth                     = 0.5f;
-        _timeLongView.layer.borderColor                     = [UIColor redColor].CGColor;
+        _timeLongView                                       = [[SZBMTimelongView alloc] initWithFrame:rt];
         _timeLongView.center                                = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
+        [_timeLongView setMaxLeftX:CGRectGetMaxX(_leftTbView.frame)];
+        {
+            __weak __typeof(self)weakSelf = self;
+            [_timeLongView setSZBMTimelongViewCallBack:^(CGRect frame,BOOL finish) {
+                __strong __typeof(weakSelf)strongSelf = weakSelf;
+                [strongSelf _respondseTimeLongCallBack:frame finish:finish];
+            }];
+            
+        }
         [self addSubview:_timeLongView];
 
 
@@ -134,11 +156,13 @@
 
         self.timeTitleArr                    = SZBMMeetingChartView_hours_title;
         _f_begining_time                     = SZBMMeetingChartView_hours_begin_time;
-        [_horizonalScrollView setContentOffset:CGPointMake((WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2 , 0)];
+        CGFloat f_init_offset_x = __bMoveEnable?0.0f:(WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2;
+        [_horizonalScrollView setContentOffset:CGPointMake(f_init_offset_x, 0)];
 
-
-        // using for test
-        _horizonalScrollView.backgroundColor = [UIColor clearColor];//[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.1]
+ 
+        _horizonalScrollView.backgroundColor = [UIColor clearColor];
+        
+        __broopingMove = NO;
         
     }
     return self;
@@ -171,8 +195,62 @@
     float v_width = SZBMMeetingChartView_rules_width_unit * (minitues/60.0f);
     CGRect rt = _timeLongView.frame;
     rt.size.width = v_width;
+    if ( CGRectGetMaxX(rt) > CGRectGetMaxX(self.bounds)) {
+        rt.origin.x = CGRectGetMaxX(self.bounds) - CGRectGetWidth(rt);
+    }
     _timeLongView.frame = rt;
-    _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
+    
+ 
+    if ( v_width < SZBMMeetingChartView_TimelongMoveMinWidth )
+    {
+        // 使用留白做法
+        _timeLongView.moveEnable = NO;
+        __bMoveEnable = NO;
+        
+        if ( _nCurrentMode != 2 )
+        {
+            rt = _rightTbView.frame;
+            float f_movingdis = rt.origin.x;
+            rt.origin.x =  (WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2;
+            f_movingdis = (WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2 - f_movingdis;
+            
+            _rightTbView.frame = rt;
+            [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width] + (WINDOW_WIDTH - SZBMMeetingChartView_left_width), 0)];
+            [_horizonalScrollView setContentOffset:CGPointMake(_horizonalScrollView.contentOffset.x + f_movingdis, _horizonalScrollView.contentOffset.y)];
+            
+            _nCurrentMode = 2;
+        }
+        
+    }
+    else
+    {
+        // 不使用留白做法
+        _timeLongView.moveEnable = YES;
+        __bMoveEnable = YES;
+        
+        if ( _nCurrentMode != 1 )
+        {
+            
+            rt = _rightTbView.frame;
+            float f_movingdis = rt.origin.x;   
+            rt.origin.x =  0;
+            float f_offset_x = MAX(0, _horizonalScrollView.contentOffset.x - f_movingdis);
+            
+            _rightTbView.frame = rt;
+            [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width], 0)];
+            [_horizonalScrollView setContentOffset:CGPointMake(f_offset_x, _horizonalScrollView.contentOffset.y)];
+            
+            
+            _nCurrentMode = 1;
+        }
+        
+        
+    }
+    
+    if ( !__bMoveEnable)
+    {
+        _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
+    }
     
 }
 
@@ -205,8 +283,7 @@
         
         [_leftTbView reloadData];
         [_rightTbView reloadData];
-        
-        
+
     });
     
 }
@@ -234,7 +311,6 @@
         hview.layer.cornerRadius = 10.0f; 
         hview.layer.masksToBounds = YES;
         hview.backgroundColor = [UIColor whiteColor];
-        
         [view addSubview:hview];
         
         return view;
@@ -296,21 +372,7 @@
     // detect distance and offset
     if ( _horizonalScrollView == scrollView )
     {
-        float f_inside_x = scrollView.contentOffset.x - CGRectGetWidth(_timeLongView.bounds)/2;
-        
-        if ( f_inside_x >= 0 &&
-            f_inside_x <= [self _SZBMMeetingChartView_chart_width])
-        {
-            // 时长view在时间图表的有效位置
-            NSInteger n_increace_miniues = f_inside_x/SZBMMeetingChartView_rules_width_unit*60;
-            // 针对 时间刻度进来取舍
-            NSInteger n_return_minitues = floor((n_increace_miniues + SZBMMeetingChartView_rules_unit/2.0)/SZBMMeetingChartView_rules_unit)*SZBMMeetingChartView_rules_unit + _f_begining_time;
-            
-            if (_timeCallBackBlock) {
-                _timeCallBackBlock(n_return_minitues);
-            }
-        }
-        
+        [self _judgeTimeSelectedFunc];
     }
 }
 
@@ -341,19 +403,121 @@
         return;
     }
     
+    CGRect rtInSuper = [self _getRightTbviewSuperViewPosition];
     
-    float f_inside_x = scrollView.contentOffset.x - CGRectGetWidth(_timeLongView.bounds)/2;
+    if ( CGRectGetMinX(rtInSuper) > CGRectGetMinX(_timeLongView.frame) )
+    {
+        float f_tozero = CGRectGetMinX(_timeLongView.frame) - CGRectGetMinX(_horizonalScrollView.frame);
+        float f_offset = CGRectGetMinX(_rightTbView.frame) - f_tozero;
+        [scrollView setContentOffset:CGPointMake(f_offset, 0) animated:YES];
+    }
+    else if( CGRectGetMaxX(rtInSuper) < CGRectGetMaxX(_timeLongView.frame) )
+    {
+        CGRect rt = [self convertRect:_timeLongView.frame toView:_horizonalScrollView];
+        [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x - (CGRectGetMaxX(rt) - CGRectGetMaxX(_rightTbView.frame)), 0) animated:YES];
+    }
+}
+
+- (CGRect)_getRightTbviewSuperViewPosition
+{
+    return [_horizonalScrollView convertRect:_rightTbView.frame toView:self];
+}
+
+/**
+ *  计算会议开始的时间并返回
+ */
+- (void)_judgeTimeSelectedFunc
+{
+    CGRect rtInSuper = [self _getRightTbviewSuperViewPosition];
+    float f_inside_x = CGRectGetMinX(_timeLongView.frame) - CGRectGetMinX(rtInSuper) ;
     
-    if ( f_inside_x < 0 )
+    if ( f_inside_x >= 0 &&
+        f_inside_x <= [self _SZBMMeetingChartView_chart_width])
     {
-        [scrollView setContentOffset:CGPointMake(CGRectGetWidth(_timeLongView.bounds)/2, 0) animated:YES];
+        // 时长view在时间图表的有效位置
+        NSInteger n_increace_miniues = f_inside_x/SZBMMeetingChartView_rules_width_unit*SZBMMeetingChartView_rules_width_unit_minitues;
+        // 针对 时间刻度进来取舍
+        NSInteger n_return_minitues = floor((n_increace_miniues + SZBMMeetingChartView_rules_unit/2.0)/SZBMMeetingChartView_rules_unit)*SZBMMeetingChartView_rules_unit + _f_begining_time;
+        
+        if (_timeCallBackBlock) {
+            _timeCallBackBlock(n_return_minitues);
+        }
     }
-    else if(f_inside_x >= [self _SZBMMeetingChartView_chart_width] - CGRectGetWidth(_timeLongView.bounds))
+}
+
+/**
+ *  绿条移动后的检测
+ *
+ *  @param frame 绿条的frame
+ */
+- (void)_respondseTimeLongCallBack:(CGRect)frame finish:(BOOL)finish
+{
+    
+    float f_moving_speed = 0.0;
+    
+    // 接近到多少开始启动
+    float f_start_closing_distancing = 10.0;
+    
+    // 速度系数，越小越快
+    float f_speed_xishu = 30.0f;
+    if ( CGRectGetMinX(frame) < CGRectGetMaxX(_leftTbView.frame) + f_start_closing_distancing ) {
+        // to the left
+        f_moving_speed = (CGRectGetMinX(frame) - (CGRectGetMaxX(_leftTbView.frame) + f_start_closing_distancing))/f_speed_xishu;
+    }
+    else if ( CGRectGetMaxX(frame) > CGRectGetMaxX(self.bounds) - f_start_closing_distancing )
     {
-        [scrollView setContentOffset:CGPointMake([self _SZBMMeetingChartView_chart_width] - CGRectGetWidth(_timeLongView.bounds)/2, 0) animated:YES];
+        // to the right
+        f_moving_speed = (CGRectGetMaxX(frame) - (CGRectGetMaxX(self.bounds) - f_start_closing_distancing))/f_speed_xishu;
     }
+    
+    
+    if (  f_moving_speed == 0.0 )
+    {
+        [_horizonalScrollView.layer removeAllAnimations];
+        __broopingMove = NO;
+        // judging
+        [self _judgeTimeSelectedFunc];
+    }
+    else
+    {
+        // moving horizenall scrollview
+        __broopingMove = YES;
+        [self _movingBySpeedSet:f_moving_speed];
+       
+    }
+    
+    if ( finish ) {
+        [_horizonalScrollView.layer removeAllAnimations];
+        __broopingMove = NO;
+    }
+    
     
     
 }
+
+- (void)_movingBySpeedSet:(CGFloat)x
+{
+    [_horizonalScrollView.layer removeAllAnimations];
+    
+    if ( !__broopingMove) {
+        return;
+    }
+    
+    float f_time = 0.3f;
+    float f_widthPersec = 10;
+    float f_position = f_time*f_widthPersec*x;
+    
+    [UIView animateWithDuration:f_time
+                     animations:^{
+                         CGFloat f_offset = MAX(0, _horizonalScrollView.contentOffset.x + f_position);
+                         f_offset = MIN(_horizonalScrollView.contentSize.width - CGRectGetWidth(_horizonalScrollView.bounds), f_offset);
+                         [_horizonalScrollView setContentOffset:CGPointMake(f_offset, _horizonalScrollView.contentOffset.y)];
+                     }
+                     completion:^(BOOL finished){
+                         [self _movingBySpeedSet:x];
+                     }];
+}
+
+
 
 @end

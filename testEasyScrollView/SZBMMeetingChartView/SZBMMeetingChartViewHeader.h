@@ -18,26 +18,35 @@
 
 #define RGB(R,G,B,A) [UIColor colorWithRed:(R)/255.0f green:(G)/255.0f blue:(B)/255.0f alpha:(A)/255.0f]
 
+// 绿条能否移动
+#define SZBMMeetingChartView_TimelongMoveEnable        YES
+
+// 绿条小于限定区域将很难按住移动 此时在uiscrollview 左右两边留白
+#define SZBMMeetingChartView_TimelongMoveMinWidth      30
+
 // 左部分名字区域的宽度
-#define SZBMMeetingChartView_left_width            80
+#define SZBMMeetingChartView_left_width                80
 
 // 左边tableview 和 右边tablveivew 之间留白的宽度
-#define SZBMMeetingChartView_left_right_pading     0
+#define SZBMMeetingChartView_left_right_pading         0
 
 // 一个单位刻度宽度
-#define SZBMMeetingChartView_rules_width_unit      60
+#define SZBMMeetingChartView_rules_width_unit          60
+
+// 一个单位刻度宽度代表的时间
+#define SZBMMeetingChartView_rules_width_unit_minitues 60
 
 // 一个刻度单位间隔为5分钟
-#define SZBMMeetingChartView_rules_unit            5
+#define SZBMMeetingChartView_rules_unit                5
 
 // 每一个图表数据cell占的高度
-#define SZBMMeetingChartView_chart_height          40
+#define SZBMMeetingChartView_chart_height              40
 
 // 图表头部占用高度
-#define SZBMMeetingChartView_chart_head_height     40
+#define SZBMMeetingChartView_chart_head_height         40
 
 // 画图表的高度
-#define SZBMMeetingChartView_chart_view_height     20
+#define SZBMMeetingChartView_chart_view_height         20
 
 // 画图表的颜色
 #define SZBMMeetingChartView_chart_view_color      RGB(48, 138, 60, 255)

@@ -22,6 +22,7 @@
 		BECA38C11D5314E50077A45D /* chartViewData.json in Resources */ = {isa = PBXBuildFile; fileRef = BECA38C01D5314E50077A45D /* chartViewData.json */; };
 		BECA38C41D531B260077A45D /* SZBMMeetinChartViewNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BECA38C31D531B260077A45D /* SZBMMeetinChartViewNameCell.m */; };
 		BECA38C71D531DB20077A45D /* SZBMMeetinChartView_TestOb.m in Sources */ = {isa = PBXBuildFile; fileRef = BECA38C61D531DB20077A45D /* SZBMMeetinChartView_TestOb.m */; };
+		BED653821D595DF200C2E91F /* SZBMTimelongView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED653811D595DF200C2E91F /* SZBMTimelongView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		BECA38C31D531B260077A45D /* SZBMMeetinChartViewNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetinChartViewNameCell.m; sourceTree = "<group>"; };
 		BECA38C51D531DB20077A45D /* SZBMMeetinChartView_TestOb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMMeetinChartView_TestOb.h; sourceTree = "<group>"; };
 		BECA38C61D531DB20077A45D /* SZBMMeetinChartView_TestOb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetinChartView_TestOb.m; sourceTree = "<group>"; };
+		BED653801D595DF200C2E91F /* SZBMTimelongView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMTimelongView.h; sourceTree = "<group>"; };
+		BED653811D595DF200C2E91F /* SZBMTimelongView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMTimelongView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,8 @@
 				BECA38C51D531DB20077A45D /* SZBMMeetinChartView_TestOb.h */,
 				BECA38C61D531DB20077A45D /* SZBMMeetinChartView_TestOb.m */,
 				BEA4F9501D55875E00340FD2 /* SZBMChartSliderView */,
+				BED653801D595DF200C2E91F /* SZBMTimelongView.h */,
+				BED653811D595DF200C2E91F /* SZBMTimelongView.m */,
 			);
 			name = SZBMMeetingChartView;
 			path = testEasyScrollView/SZBMMeetingChartView;
@@ -333,6 +338,7 @@
 				BE89A6BC1D5180330006420E /* main.m in Sources */,
 				BE89A6F01D5190B30006420E /* SZBMMeetingChartView.m in Sources */,
 				BECA38AF1D52F7090077A45D /* SZBMMeetinChartViewCell.m in Sources */,
+				BED653821D595DF200C2E91F /* SZBMTimelongView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
