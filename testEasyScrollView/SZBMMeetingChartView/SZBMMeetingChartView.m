@@ -106,7 +106,7 @@
         }
         else
         {
-            [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width] + (WINDOW_WIDTH - SZBMMeetingChartView_left_width), 0)];
+            [_horizonalScrollView setContentSize:CGSizeMake([self _liubaiScrollivewContentSizeWidth], 0)];
         }
 
 
@@ -189,6 +189,96 @@
     
 }
 
+/**
+ *  设置会议时间
+ *
+ *  @param startTime 会议开始时间GTM
+ *  @param minitues  会议时长
+ */
+- (void)setMeetingTime:(NSTimeInterval)startTime timeLong:(NSInteger)minitues
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [_sliderView initMeetingTime:minitues];
+        
+        [self _adjustTimelongFrame:minitues];
+        
+        // moving content set to a visible area
+        [self _adjustMeetingStartTime:startTime timeLong:minitues];
+        
+        [self _judgeTimeSelectedFunc];
+        
+        [self _detectScrollivewStopMoving:self.horizonalScrollView];
+        
+    });
+    
+    
+}
+
+// 
+- (void)_adjustMeetingStartTime:(NSTimeInterval)startTime timeLong:(NSInteger)minitues
+{
+    // 第分钟占用的宽度
+    float f_widthPerMin = SZBMMeetingChartView_rules_width_unit/(SZBMMeetingChartView_rules_width_unit_minitues*1.0f);
+    
+    // 时间起始位置
+    float fbeginMinPosition = ([SZBMMeetingChartViewHeader getMinituesFromGMT:startTime] - SZBMMeetingChartView_hours_begin_time)*f_widthPerMin;
+    
+    // 时长view在时间图表的有效宽度
+    NSInteger n_distanceIntbview = (minitues * f_widthPerMin);
+    
+    //1:不留边模式 2:留边模式
+    if ( _nCurrentMode == 2 )
+    {
+        // 相对时间的起点
+        float f_start_time_point_x = CGRectGetMinX(_rightTbView.frame) + fbeginMinPosition + n_distanceIntbview/2.0;
+        float foffset_x = f_start_time_point_x - CGRectGetWidth(_horizonalScrollView.frame)/2.0;
+        
+        // just scroll horizenal scrollview to position
+        [_horizonalScrollView setContentOffset:CGPointMake(foffset_x, _horizonalScrollView.contentOffset.y)];
+    }
+    else
+    {
+        CGRect timeLongViewFrameInScrollview_rt = [self convertRect:_timeLongView.frame toView:_horizonalScrollView];
+        
+        // 相对时间的起点
+        float f_start_time_point_x = CGRectGetMinX(_rightTbView.frame) + fbeginMinPosition;
+        
+        // || f_start_time_point_x + n_distanceIntbview == _timeLongView(min_x) + _horizonalScrollView.contentOffset.x ? ||;
+        float f_need_offset_x = f_start_time_point_x + n_distanceIntbview - CGRectGetMinX(timeLongViewFrameInScrollview_rt);
+        
+        if ( f_need_offset_x >= 0.0 &&
+            f_need_offset_x <= _horizonalScrollView.contentSize.width - CGRectGetWidth(_horizonalScrollView.frame) )
+        {
+            // 默认绿条放中间，scrollview 随着移动
+            _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
+            
+            [_horizonalScrollView setContentOffset:CGPointMake(f_need_offset_x - n_distanceIntbview/2, _horizonalScrollView.contentOffset.y)];
+        }
+        else if( f_need_offset_x < 0.0 )
+        {
+            [_horizonalScrollView setContentOffset:CGPointMake(0, _horizonalScrollView.contentOffset.y)];
+            // scrollview 没办法移动到正确位置时，再移动绿条到相对位置
+            // || f_start_time_point_x + n_distanceIntbview == _timeLongView(min_x) ? + _horizonalScrollView.contentOffset.x(0) ||;
+            float f_timeLongPostion_x = f_start_time_point_x + n_distanceIntbview - 0;
+            _timeLongView.center = CGPointMake(f_timeLongPostion_x + CGRectGetMinX(_horizonalScrollView.frame) - CGRectGetWidth(_timeLongView.bounds)/2, _timeLongView.center.y);
+            
+        }
+        else
+        {
+            float f_offset_x = _horizonalScrollView.contentSize.width - CGRectGetWidth(_horizonalScrollView.frame);
+            [_horizonalScrollView setContentOffset:CGPointMake(f_offset_x, _horizonalScrollView.contentOffset.y)];
+            
+            // scrollview 没办法移动到正确位置时，再移动绿条到相对位置
+            // || f_start_time_point_x + n_distanceIntbview == _timeLongView(min_x) ? + _horizonalScrollView.contentOffset.x(0) ||;
+            float f_timeLongPostion_x = f_start_time_point_x + n_distanceIntbview - f_offset_x;
+            _timeLongView.center = CGPointMake(f_timeLongPostion_x + CGRectGetMinX(_horizonalScrollView.frame) - CGRectGetWidth(_timeLongView.bounds)/2, _timeLongView.center.y);
+        }
+    }
+}
+
+
 - (void)_adjustTimelongFrame:(NSInteger)minitues
 {
     
@@ -215,7 +305,7 @@
             f_movingdis = (WINDOW_WIDTH - SZBMMeetingChartView_left_width)/2 - f_movingdis;
             
             _rightTbView.frame = rt;
-            [_horizonalScrollView setContentSize:CGSizeMake([self _SZBMMeetingChartView_chart_width] + (WINDOW_WIDTH - SZBMMeetingChartView_left_width), 0)];
+            [_horizonalScrollView setContentSize:CGSizeMake( [self _liubaiScrollivewContentSizeWidth], 0)];
             [_horizonalScrollView setContentOffset:CGPointMake(_horizonalScrollView.contentOffset.x + f_movingdis, _horizonalScrollView.contentOffset.y)];
             
             _nCurrentMode = 2;
@@ -250,6 +340,11 @@
         _timeLongView.center = CGPointMake(self.center.x + SZBMMeetingChartView_total_left/2, _timeLongView.center.y);
     }
     
+}
+
+- (float)_liubaiScrollivewContentSizeWidth
+{
+    return [self _SZBMMeetingChartView_chart_width] + (WINDOW_WIDTH - SZBMMeetingChartView_left_width);
 }
 
 /**
@@ -454,7 +549,7 @@
     float f_moving_speed = 0.0;
     
     // 接近到多少开始启动
-    float f_start_closing_distancing = 10.0;
+    float f_start_closing_distancing = 2.0f;
     
     // 速度系数，越小越快
     float f_speed_xishu = 30.0f;
@@ -489,8 +584,6 @@
         __broopingMove = NO;
     }
     
-    
-    
 }
 
 - (void)_movingBySpeedSet:(CGFloat)x
@@ -512,6 +605,11 @@
                          [_horizonalScrollView setContentOffset:CGPointMake(f_offset, _horizonalScrollView.contentOffset.y)];
                      }
                      completion:^(BOOL finished){
+                         if ( _horizonalScrollView.contentOffset.x <= 0.0 ||
+                              _horizonalScrollView.contentOffset.x > _horizonalScrollView.contentSize.width - CGRectGetWidth(_horizonalScrollView.bounds))
+                         {
+                             __broopingMove = NO;
+                         }
                          [self _movingBySpeedSet:x];
                      }];
 }

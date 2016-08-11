@@ -49,7 +49,17 @@
     SZBMMeetingChartView *cView = [[SZBMMeetingChartView alloc] initWithFrame:rt];
     [self.view addSubview:cView];
     
-    [cView setMeetingTimeLong:60];
+    /*
+     
+    1470268800 08:00
+    1470240000 00:00
+    1470297000 15:50
+    1470325800 23:50
+    1470322800 23:00
+     */
+    
+    
+    [cView setMeetingTime:1470297000 timeLong:40];
     [cView loadChartData:[self _loadChartViewData]];
     
     

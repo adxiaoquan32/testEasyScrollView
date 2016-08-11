@@ -62,5 +62,21 @@
 
 //#define SZBMMeetingChartView_hours_title @[@"8:00",@"9:00",@"10:00",@"11:00",@"12:00",@"13:00",@"14:00",@"15:00",@"16:00",@"17:00",@"18:00"];
 
+@interface SZBMMeetingChartViewHeader : NSObject
+
+
+/**
+ *  将GMT抽出时间成分转成分钟
+ *
+ *  @param timeinterval GMT 秒
+ *
+ *  @return 返回分钟
+ */
++ (float)getMinituesFromGMT:( NSTimeInterval )timeinterval;
+
+@end
+
+
+
  
 #endif /* SZBMMeetingChartViewHeader_h */

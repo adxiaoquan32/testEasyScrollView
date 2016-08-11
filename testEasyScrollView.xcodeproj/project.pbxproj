@@ -23,6 +23,7 @@
 		BECA38C41D531B260077A45D /* SZBMMeetinChartViewNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BECA38C31D531B260077A45D /* SZBMMeetinChartViewNameCell.m */; };
 		BECA38C71D531DB20077A45D /* SZBMMeetinChartView_TestOb.m in Sources */ = {isa = PBXBuildFile; fileRef = BECA38C61D531DB20077A45D /* SZBMMeetinChartView_TestOb.m */; };
 		BED653821D595DF200C2E91F /* SZBMTimelongView.m in Sources */ = {isa = PBXBuildFile; fileRef = BED653811D595DF200C2E91F /* SZBMTimelongView.m */; };
+		BED653841D5AAE1F00C2E91F /* SZBMMeetingChartViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = BED653831D5AAE1F00C2E91F /* SZBMMeetingChartViewHeader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		BECA38C61D531DB20077A45D /* SZBMMeetinChartView_TestOb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetinChartView_TestOb.m; sourceTree = "<group>"; };
 		BED653801D595DF200C2E91F /* SZBMTimelongView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZBMTimelongView.h; sourceTree = "<group>"; };
 		BED653811D595DF200C2E91F /* SZBMTimelongView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMTimelongView.m; sourceTree = "<group>"; };
+		BED653831D5AAE1F00C2E91F /* SZBMMeetingChartViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZBMMeetingChartViewHeader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			children = (
 				BECA38C01D5314E50077A45D /* chartViewData.json */,
 				BECA38AC1D52F58E0077A45D /* SZBMMeetingChartViewHeader.h */,
+				BED653831D5AAE1F00C2E91F /* SZBMMeetingChartViewHeader.m */,
 				BE89A6EE1D5190B30006420E /* SZBMMeetingChartView.h */,
 				BE89A6EF1D5190B30006420E /* SZBMMeetingChartView.m */,
 				BE728DE71D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.h */,
@@ -333,6 +336,7 @@
 				BECA38C41D531B260077A45D /* SZBMMeetinChartViewNameCell.m in Sources */,
 				BEA4F9531D55877A00340FD2 /* SZBMChartSliderView.m in Sources */,
 				BECA38C71D531DB20077A45D /* SZBMMeetinChartView_TestOb.m in Sources */,
+				BED653841D5AAE1F00C2E91F /* SZBMMeetingChartViewHeader.m in Sources */,
 				BE89A6BF1D5180330006420E /* AppDelegate.m in Sources */,
 				BE728DE91D51E09A00327702 /* SZBMMeetingTimeRulesHeaderView.m in Sources */,
 				BE89A6BC1D5180330006420E /* main.m in Sources */,

@@ -29,6 +29,14 @@ typedef void(^SZBMMeetingChartViewTimeSBack)(NSInteger nMbeginTimeMins);
 - (void)setMeetingTimeLong:(NSInteger)minitues;
 
 /**
+ *  设置会议时间
+ *
+ *  @param startTime 会议开始时间GTM
+ *  @param minitues  会议时长
+ */
+- (void)setMeetingTime:(NSTimeInterval)startTime timeLong:(NSInteger)minitues;
+
+/**
  *  实时返回滚动后的时间
  *
  *  @param callBacBlock SZBMMeetingChartViewTimeSBack

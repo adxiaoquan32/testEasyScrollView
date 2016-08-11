@@ -96,28 +96,12 @@
         
     }
     
-    NSLog(@"\n\n\n______end_____");
-    
 }
 
 //
 - (float)_getStartTimeline:( szbmMeetingSchedule * )schedulOb
 {
-    //给一个时间秒数,取出对应的时间
-    NSDate *d = [NSDate dateWithTimeIntervalSince1970:schedulOb.startTimeInterval];
-    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
-    [formatter1 setDateFormat:@"HH:mm"];
-    NSString *showtimeNew = [formatter1 stringFromDate:d];
-    NSArray *timearr = [showtimeNew componentsSeparatedByString:@":"];
-    
-    NSLog(@"___time:%@ timelong:%ld",showtimeNew,(long)schedulOb.nLastTimeLong);
-    
-    if ( [timearr count] >= 2 )
-    {
-        return [[timearr objectAtIndex:0] integerValue] * 60 + [[timearr objectAtIndex:1] integerValue];
-    }
-    
-    return -1;
+    return [SZBMMeetingChartViewHeader getMinituesFromGMT:schedulOb.startTimeInterval];
 }
 
 

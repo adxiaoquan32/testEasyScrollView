@@ -148,6 +148,20 @@
     }
 }
 
+- (void)setCenter:(CGPoint)center
+{
+    [super setCenter: center];
+    
+    if ( !_isMoving )
+    {
+        CGRect rt = self.frame;
+        rt.origin.x = center.x - CGRectGetWidth(rt);
+        _keepFrame_rt = rt;
+    }
+    
+}
+
+
 - (void)setMaxLeftX:(CGFloat)fPositionX
 {
     self.fMinimum_X = fPositionX;
