@@ -20,13 +20,32 @@
 
 @implementation ViewController
 
+
+- (void)_test
+{
+    NSLog(@"AAA");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"BBB");
+    });
+    NSLog(@"CCC");
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        NSLog(@"DDD");
+    });
+    NSLog(@"EEE");
+    
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    NSDate *date = [NSDate date];
-    NSLog(@"__%@__%f__",date,[date timeIntervalSince1970]);
+    //NSDate *date = [NSDate date];
+    //NSLog(@"__%@__%f__",date,[date timeIntervalSince1970]);
     
+    
+    [self _test];
  
     
     self.view.backgroundColor = RGB(244,245,246,205);//[UIColor colorWithRed:244/255.0 green:245/255.0 blue:246/255.0 alpha:0.1];
